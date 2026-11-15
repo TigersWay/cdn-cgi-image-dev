@@ -1,0 +1,10 @@
+{
+  "name": "example-eleventy",
+  "private": true,
+  "type": "module",
+  "scripts": { "dev": "eleventy --serve", "build": "eleventy" },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "cdn-cgi-image-dev": "workspace:*"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "name": "cdn-cgi-image-dev",
+  "description": "Emulate Cloudflare Image Transformations (/cdn-cgi/image) in local dev servers.",
+  "keywords": [
+    "cloudflare",
+    "image-transformations",
+    "cdn-cgi",
+    "vite-plugin",
+    "eleventy",
+    "dev-server",
+    "browsersync"
+  ],
+  "version": "0.0.2",
+  "license": "MIT",
+  "author": "Ben Michaud <ben@tigersway.net>",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TigersWay/cdn-cgi-image-dev.git"
+  },
+  "homepage": "https://github.com/TigersWay/cdn-cgi-image-dev/packages/cdn-cgi-image-dev/#readme",
+  "type": "module",
+  "exports": {
+    ".": "./src/core.js",
+    "./vite": "./src/vite.js",
+    "./eleventy": "./src/eleventy.js"
+  },
+  "files": [
+    "src"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "bun test"
+  },
+  "dependencies": {
+    "sharp": "^0.33.0"
+  },
+  "peerDependencies": {
+    "@11ty/eleventy": ">=3",
+    "vite": ">=5"
+  },
+  "peerDependenciesMeta": {
+    "@11ty/eleventy": {
+      "optional": true
+    },
+    "vite": {
+      "optional": true
+    }
+  }
+}

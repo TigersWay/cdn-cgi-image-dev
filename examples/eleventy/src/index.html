@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>cdn-cgi-image-dev · Eleventy demo</title>
+  <style>
+    body {
+      font-family: system-ui, sans-serif;
+      max-width: 72rem;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 1rem;
+      grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    figure {
+      margin: 0;
+    }
+
+    img {
+      width: 100%;
+      border-radius: 0.5rem;
+      object-fit: cover;
+      display: block;
+    }
+
+    figcaption {
+      font-size: 0.85rem;
+      color: #666;
+      margin-top: 0.25rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>cdn-cgi-image-dev · Eleventy demo</h1>
+  <p>Same URLs in dev and on Cloudflare: <code>/cdn-cgi/image/width=640,format=auto/images/&lt;path&gt;</code></p>
+  <div class="grid">
+    <figure>
+      <img src="/cdn-cgi/image/width=640,format=auto/images/lauren-kay-unsplash.jpg" alt="lauren-kay" loading="lazy" /> <!-- cSpell:disable-line -->
+      <figcaption></figcaption>
+    </figure>
+    <figure>
+      <img src="/cdn-cgi/image/width=640,format=auto/images/blue-eyes.jpg" alt="blue-eyes" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+    <figure>
+      <img src="/cdn-cgi/image/width=640,format=auto/images/sub/démonstration.png" alt="démonstration" loading="lazy" />
+      <figcaption></figcaption>
+    </figure>
+  </div>
+  <script>
+    // Show the real width of what the server sent back (proves the resize happened).
+    document.querySelectorAll('figure img').forEach((img) => {
+      const show = () => (img.nextElementSibling.textContent = img.naturalWidth + 'px wide');
+      img.complete ? show() : img.addEventListener('load', show);
+    });
+  </script>
+</body>
+</html>

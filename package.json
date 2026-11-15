@@ -1,0 +1,13 @@
+{
+  "name": "cdn-cgi-image-dev-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "examples/*"
+  ],
+  "scripts": {
+    "dev:vite": "bun run --filter example-vite dev",
+    "dev:11ty": "bun run --filter example-eleventy dev",
+    "test": "bun test"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "npm.packageManager": "bun",
+  "npm.scriptRunner": "bun",
+  "cSpell.words": [],
+
+  "html.format.wrapLineLength": 180
+}
