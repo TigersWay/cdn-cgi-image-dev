@@ -59,7 +59,9 @@ export function createImageHandler({ roots, maxDimension = 4096, warn = console.
       }
 
       const format = pickFormat(options.format, req.headers.accept);
-      const key = `${req.url}|${format}|${found.mtimeMs}`;
+      // Key on the normalized options (not the raw URL), so w=640 and width=640
+      // share one entry. `options` is built in a fixed key order, so stringify is stable.
+      const key = `${found.file}|${found.mtimeMs}|${format}|${JSON.stringify(options)}`;
 
       let hit = cache.get(key);
       if (!hit) {

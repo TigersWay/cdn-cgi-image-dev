@@ -10,14 +10,14 @@
     "dev-server",
     "browsersync"
   ],
-  "version": "0.0.2",
+  "version": "0.1.0",
   "license": "MIT",
   "author": "Ben Michaud <ben@tigersway.net>",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/TigersWay/cdn-cgi-image-dev.git"
   },
-  "homepage": "https://github.com/TigersWay/cdn-cgi-image-dev/packages/cdn-cgi-image-dev/#readme",
+  "homepage": "https://github.com/TigersWay/cdn-cgi-image-dev/tree/main/packages/cdn-cgi-image-dev",
   "type": "module",
   "exports": {
     ".": "./src/core.js",
@@ -37,7 +37,7 @@
     "sharp": "^0.33.0"
   },
   "peerDependencies": {
-    "@11ty/eleventy": ">=3",
+    "@11ty/eleventy": "^3.0.0 || >=4.0.0-alpha.0 <=4.0.0",
     "vite": ">=5"
   },
   "peerDependenciesMeta": {

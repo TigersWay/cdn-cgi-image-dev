@@ -38,3 +38,12 @@ app.use(createImageHandler({ roots: ['public'] }));
 
 - Supported transformations: `width`, `height`, `dpr`, `quality`, `format` (incl. `auto`), `fit`.
 - Other options are ignored with a one-time warning.
+
+## CHANGELOG
+
+- **v0.1.0** 2026-11-16
+  - Add short Cloudflare options for transformation (w/width, etc)
+  - Add Cloudflare `_headers` for each demos
+  - Correction `package.json` for publication
+
+- **v0.0.1** 2026-11-15 _Initial upload_
