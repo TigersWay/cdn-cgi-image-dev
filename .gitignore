@@ -1,4 +1,12 @@
-node_modules
+# Windows & helpers, IDE,Git & Personal preferences
+desktop.ini
+folder.ico
+.keep/
+
+
+# Dependency files & directories (p/npm/bun)
+node_modules/
+
+# Current project's specific files & directories
 dist
 _site
-.DS_Store

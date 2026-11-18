@@ -41,6 +41,9 @@ app.use(createImageHandler({ roots: ['public'] }));
 
 ## CHANGELOG
 
+- **v0.2.0** 2026-11-18
+  - Add `gravity` with auto, face (fallback to auto) and focal point
+
 - **v0.1.0** 2026-11-16
   - Add short Cloudflare options for transformation (w/width, etc)
   - Add Cloudflare `_headers` for each demos

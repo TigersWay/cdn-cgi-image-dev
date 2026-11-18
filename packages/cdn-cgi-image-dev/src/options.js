@@ -1,4 +1,9 @@
 // @ts-check
+import { parseGravity } from './gravity.js';
+
+/**
+ * @typedef {import('./gravity.js').Gravity} Gravity
+ */
 
 /**
  * @typedef {Object} ImageOptions
@@ -8,6 +13,7 @@
  * @property {number} [quality]
  * @property {'auto'|'avif'|'webp'|'jpeg'|'png'} [format]
  * @property {string} [fit]
+ * @property {Gravity} [gravity]
  */
 
 /**
@@ -25,14 +31,14 @@ export const FIT = {
 };
 
 const FORMATS = new Set(['auto', 'avif', 'webp', 'jpeg', 'png']);
-const SUPPORTED = new Set(['width', 'height', 'dpr', 'quality', 'format', 'fit']);
+const SUPPORTED = new Set(['width', 'height', 'dpr', 'quality', 'format', 'fit', 'gravity']);
 
 /**
  * Cloudflare short forms, resolved to the full option name.
  * `dpr`&`fit` are always written in full.
  * @type {Record<string, string>}
  */
-const ALIASES = { w: 'width', h: 'height', q: 'quality', f: 'format' };
+const ALIASES = { w: 'width', h: 'height', q: 'quality', f: 'format', g: 'gravity' };
 
 /**
  * Clamps a value/number between minimum and maximum values.
@@ -73,6 +79,7 @@ export function parseOptions(str, { maxDimension = 4096 } = {}) {
   if (raw.quality) options.quality = clamp(Number(raw.quality) || 85, 1, 100);
   if (raw.format && FORMATS.has(raw.format)) options.format = /** @type {any} */ (raw.format);
   if (raw.fit && raw.fit in FIT) options.fit = raw.fit;
+  if (raw.gravity) options.gravity = parseGravity(raw.gravity); // undefined if invalid
 
   return { options, ignored };
 }

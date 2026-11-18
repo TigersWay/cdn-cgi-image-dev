@@ -15,7 +15,7 @@
     .grid {
       display: grid;
       gap: 1rem;
-      grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(18rem, 1fr));
       align-items: center;
       margin-top: 2rem;
     }
@@ -43,14 +43,19 @@
   <p>Same URLs in dev and on Cloudflare: <code>/cdn-cgi/image/width=640,format=auto/images/&lt;path&gt;</code></p>
   <div class="grid">
     <figure>
-      <img src="/cdn-cgi/image/width=640,format=auto/images/lauren-kay-unsplash.jpg" alt="lauren-kay" loading="lazy" /> <!-- cSpell:disable-line -->
+      <code>width=640,format=auto</code>
+      <!-- cSpell:disable-next-line -->
+      <img src="/cdn-cgi/image/width=640,format=auto/images/lauren-kay-unsplash.jpg" alt="lauren-kay" loading="lazy" />
+      <!-- cSpell:disable-line -->
       <figcaption></figcaption>
     </figure>
     <figure>
-      <img src="/cdn-cgi/image/width=640,format=auto/images/blue-eyes.jpg" alt="blue-eyes" loading="lazy" />
+      <code>width=400,height=400,fit=cover,gravity=face</code>
+      <img src="/cdn-cgi/image/width=400,height=400,fit=cover,gravity=face,format=auto/images/blue-eyes.jpg" alt="blue-eyes" loading="lazy" />
       <figcaption></figcaption>
     </figure>
     <figure>
+      <code>width=640,format=auto</code>
       <img src="/cdn-cgi/image/width=640,format=auto/images/sub/démonstration.png" alt="démonstration" loading="lazy" />
       <figcaption></figcaption>
     </figure>

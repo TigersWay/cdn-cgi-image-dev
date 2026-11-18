@@ -3,6 +3,7 @@ import path from 'node:path';
 import { stat, readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { parseOptions, pickFormat, FIT } from './options.js';
+import { focalCrop } from './gravity.js';
 
 const ROUTE = /^\/cdn-cgi\/image\/([^/]+)\/([^?#]+)/;
 
@@ -20,6 +21,13 @@ export function createImageHandler({ roots, maxDimension = 4096, warn = console.
   /** @type {Map<string, {data: Buffer, type: string}>} */
   const cache = new Map(); // TODO: persistent cache in node_modules/.cache
   const warned = new Set();
+
+  /** @param {string} id @param {string} msg */
+  function warnOnce(id, msg) {
+    if (warned.has(id)) return;
+    warned.add(id);
+    warn(`[cdn-cgi-image] ${msg}`);
+  }
 
   /** @param {string} rel */
   async function locate(rel) {
@@ -66,7 +74,33 @@ export function createImageHandler({ roots, maxDimension = 4096, warn = console.
       let hit = cache.get(key);
       if (!hit) {
         let img = sharp(await readFile(found.file)).rotate();
-        if (options.width || options.height) {
+        const crops = (options.fit === 'cover' || options.fit === 'crop') && options.width && options.height;
+        if (crops) {
+          // Cloudflare only applies `gravity` when fit is cover or crop
+          const gravity = options.gravity ?? { x: 0.5, y: 0.5 };
+          if (typeof gravity === 'string') {
+            if (gravity === 'face') warnOnce('gravity=face', 'gravity=face is not emulated in dev, using gravity=auto instead');
+            img = img.resize({
+              width: options.width,
+              height: options.height,
+              fit: 'cover',
+              position: sharp.strategy.attention, // closest sharp has to Cloudflare's saliency detection
+              withoutEnlargement: options.fit === 'crop'
+            });
+          } else {
+            const { width: w = 0, height: h = 0, orientation = 1 } = await img.metadata();
+            const [srcW, srcH] = orientation >= 5 ? [h, w] : [w, h]; // EXIF-rotated dimensions
+            const { resize, extract } = focalCrop({
+              srcW,
+              srcH,
+              width: options.width,
+              height: options.height,
+              focus: gravity,
+              enlarge: options.fit === 'cover' // crop never enlarges
+            });
+            img = img.resize(resize).extract(extract);
+          }
+        } else if (options.width || options.height) {
           img = img.resize({
             width: options.width,
             height: options.height,
